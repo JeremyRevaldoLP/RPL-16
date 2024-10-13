@@ -14,32 +14,59 @@ if ($conn->connect_error) {
 
 $budget = $_GET['budget'] ?? '';
 $search_query = $_GET['search_query'] ?? '';
+$categories = $_GET['categories'] ?? []; // Get selected categories
 
-if (!empty($budget) || !empty($search_query)) {
-    $sql = "SELECT * FROM products";
+// Define your categories
+$all_categories = [
+    'CPU', 
+    'CPU Cooler', 
+    'Motherboard', 
+    'Memory', 
+    'Storage', 
+    'Video Card', 
+    'Case', 
+    'Power Supply', 
+    'Operating System', 
+    'Monitor'
+];
 
-    if (!empty($budget) && !empty($search_query)) {
-        $sql .= " WHERE price <= ? AND LOWER(name) LIKE ?";
-        $stmt = $conn->prepare($sql);
-        // Create new variables to hold the values of $budget and $search_query
-        $budget_param = $budget;
-        $search_query_param = "%" . strtolower($search_query) . "%";
-        // Pass the new variables to the bind_param() function by reference
-        $stmt->bind_param("ds", $budget_param, $search_query_param);
-    } elseif (!empty($budget)) {
-        $sql .= " WHERE price <= ?";
-        $stmt = $conn->prepare($sql);
-        // Create a new variable to hold the value of $budget
-        $budget_param = $budget;
-        // Pass the new variable to the bind_param() function by reference
-        $stmt->bind_param("d", $budget_param);
-    } elseif (!empty($search_query)) {
-        $sql .= " WHERE LOWER(name) LIKE ?";
-        $stmt = $conn->prepare($sql);
-        // Create a new variable to hold the value of $search_query
-        $search_query_param = "%" . strtolower($search_query) . "%";
-        // Pass the new variable to the bind_param() function by reference
-        $stmt->bind_param("s", $search_query_param);
+$params = []; // Initialize an array to hold parameters for bind_param
+$types = ""; // String to hold type definitions
+
+if (!empty($budget) || !empty($search_query) || !empty($categories)) {
+    $sql = "SELECT * FROM products WHERE 1=1"; // Start with a true condition
+
+    // Add budget condition
+    if (!empty($budget)) {
+        $sql .= " AND price <= ?";
+        $params[] = $budget; // Add to params
+        $types .= "d"; // 'd' for double
+    }
+
+    // Add search query condition
+    if (!empty($search_query)) {
+        $sql .= " AND LOWER(name) LIKE ?";
+        $params[] = "%" . strtolower($search_query) . "%"; // Add to params
+        $types .= "s"; // 's' for string
+    }
+
+    // Add category conditions
+    if (!empty($categories)) {
+        $placeholders = implode(',', array_fill(0, count($categories), '?'));
+        $sql .= " AND category IN ($placeholders)";
+        foreach ($categories as $category) {
+            $params[] = $category; // Add categories to params
+            $types .= "s"; // 's' for string for each category
+        }
+    }
+
+    // Prepare statement
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters if there are any
+    if (!empty($params)) {
+        // Use the call_user_func_array to bind parameters
+        $stmt->bind_param($types, ...$params);
     }
 
     $stmt->execute();
@@ -74,9 +101,18 @@ if (!empty($budget) || !empty($search_query)) {
     <h2 class="my-4">Search Products by Budget/Product name</h2>
     <form action="search.php" method="get">
         <label for="budget">Enter your budget ($):</label>
-        <input type="number" name="budget" class="form-control" placeholder="Enter your budget" value="<?php echo $budget; ?>">
+        <input type="number" name="budget" class="form-control" placeholder="Enter your budget" value="<?php echo htmlspecialchars($budget); ?>">
         <label for="search_query">Search by product name:</label>
-        <input type="text" name="search_query" class="form-control" placeholder="Enter product name" value="<?php echo $search_query; ?>">
+        <input type="text" name="search_query" class="form-control" placeholder="Enter product name" value="<?php echo htmlspecialchars($search_query); ?>">
+
+        <h5>Select Categories:</h5>
+        <?php foreach ($all_categories as $category): ?>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="categories[]" value="<?php echo htmlspecialchars($category); ?>" <?php echo in_array($category, $categories) ? 'checked' : ''; ?>>
+                <label class="form-check-label"><?php echo htmlspecialchars($category); ?></label>
+            </div>
+        <?php endforeach; ?>
+
         <button type="submit" class="btn btn-primary my-3">Search</button>
     </form>
 
@@ -87,12 +123,12 @@ if (!empty($budget) || !empty($search_query)) {
                 ?>
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="images/uploads/<?php echo $row['image']; ?>" class="card-img-top" alt="<?php echo $row['name']; ?>">
+                        <img src="images/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['name']); ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                            <p class="card-text">$<?php echo $row['price']; ?></p>
+                            <h5 class="card-title"><?php echo htmlspecialchars($row['name']); ?></h5>
+                            <p class="card-text">$<?php echo htmlspecialchars($row['price']); ?></p>
                             <!-- Checkbox to select product -->
-                            <input type="checkbox" class="product-checkbox" data-price="<?php echo $row['price']; ?>"> Select
+                            <input type="checkbox" class="product-checkbox" data-price="<?php echo htmlspecialchars($row['price']); ?>"> Select
                         </div>
                     </div>
                 </div>
