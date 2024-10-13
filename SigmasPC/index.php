@@ -42,7 +42,7 @@
 
         h2 {
             font-size: 1,5rem; /* Adjust size as needed */
-            background: linear-gradient(90deg, #C08B5C, #C08B5C, #C08B5C, #C08B5C); /* Multiple gradient colors */
+            background: linear-gradient(90deg, #795458, #795458, #795458, #795458); /* Multiple gradient colors */
             background-size: 300%; /* Makes the gradient larger for the animation */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; /* Makes the text fill transparent to show the gradient */
@@ -95,7 +95,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">
-        <img src="images/web/logo.jpg" alt="Logo" height="40"> <!-- Replace with your logo path -->
+        <img src="images/web/sigmaL.png" alt="Logo" height="40"> <!-- Replace with your logo path -->
     </a>
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
