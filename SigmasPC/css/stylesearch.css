@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('Codecfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/* General page styles */
+body {
+    font-family: 'CustomFont', sans-serif;
+    background-color: #2b2b2b;
+    color: #C08B5C;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff !important;
+    padding: 10px 20px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70px;
+}
+
+.navbar-brand {
+    color: #C08B5C;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    background-color: #795458;
+    color: #f8f9fa;
+}
+.navbar-nav { 
+    list-style-type: none;
+    padding-left: 0;
+    margin-right: auto;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.nav-link {
+    color: #C08B5C;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.nav-link:hover {
+    background-color: #795458;
+    color: #f8f9fa;
+}
+
+/* Content container */
+.container {
+    max-width: 1200px;
+    margin-left: 0;
+    margin-right: auto;
+    margin: 0 auto;
+    text-align: left;
+    margin-top: 120px;
+}
+
+/* Text styles */
+h1 {
+    font-size: 36px;
+    color: #C08B5C;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 25px;
+    color: #C08B5C;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 25px;
+    color: #C08B5C;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #C08B5C;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #795458;
+}
+
+/* Text alignment */
+.text-center {
+    text-align: center;
+}
+
+.row .card-body h5 {
+    /* custom styles for h5 within .row (on search.php)*/
+    color: #000000;
+    font-size: 18px;
+}
+
+.row .card-body p {
+    /* custom styles for p within .row (on search.php)*/
+    font-size: 14px;
+    color: #000000;
+}
+
+.admin-container {
+    /* ADMINS PAGE (add_product.php */
+    /* styles to override the default container styles */
+    max-width: 1200px; /* remove the maximum width */
+    margin-left: 0;
+    margin-right: auto;
+    margin: 0 auto; /* remove the horizontal centering */
+    padding: 0; /* remove the horizontal padding */
+    margin-top: 120px;
+}
+
+.admin-container h1 {
+    text-align: center;
+}
