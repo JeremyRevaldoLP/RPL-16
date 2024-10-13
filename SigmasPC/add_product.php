@@ -76,18 +76,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $target_dir = "images/uploads/";
     $target_file = $target_dir . basename($image);
 
+    // Retrieve selected categories
+    $categories = isset($_POST['category']) ? implode(', ', $_POST['category']) : '';
+
     // If editing
     if ($edit_mode && $edit_id) {
         if (!empty($image)) {
             move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-            $sql = "UPDATE products SET name = ?, price = ?, image = ? WHERE id = ?";
+            $sql = "UPDATE products SET name = ?, price = ?, image = ?, category = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssi", $name, $price, $image, $edit_id);
+            $stmt->bind_param("ssssi", $name, $price, $image, $categories, $edit_id);
         } else {
             // Update without changing the image
-            $sql = "UPDATE products SET name = ?, price = ? WHERE id = ?";
+            $sql = "UPDATE products SET name = ?, price = ?, category = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssi", $name, $price, $edit_id);
+            $stmt->bind_param("sssi", $name, $price, $categories, $edit_id);
         }
 
         if ($stmt->execute()) {
@@ -101,8 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // If adding a new product
     else {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-            $sql = "INSERT INTO products (name, price, image) VALUES ('$name', '$price', '$image')";
-            if ($conn->query($sql) === TRUE) {
+            $sql = "INSERT INTO products (name, price, image, category) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssss", $name, $price, $image, $categories);
+            if ($stmt->execute()) {
                 echo "New product added successfully";
             } else {
                 echo "Error: " . $conn->error;
@@ -147,6 +152,34 @@ $result = $conn->query($sql);
                     <img src="images/uploads/<?php echo $edit_product['image']; ?>" alt="Current Image" width="100">
                 <?php endif; ?>
             </div>
+
+            <!-- Add this section for product categories -->
+            <div class="mb-3">
+                <label for="category" class="form-label">Product Category</label><br>
+                <input type="checkbox" id="cpu" name="category[]" value="CPU" <?php echo ($edit_mode && strpos($edit_product['category'], 'CPU') !== false) ? 'checked' : ''; ?>>
+                <label for="cpu">CPU</label><br>
+                <input type="checkbox" id="gpu" name="category[]" value="GPU" <?php echo ($edit_mode && strpos($edit_product['category'], 'GPU') !== false) ? 'checked' : ''; ?>>
+                <label for="gpu">GPU</label><br>
+                <input type="checkbox" id="cooler" name="category[]" value="CPU Cooler" <?php echo ($edit_mode && strpos($edit_product['category'], 'CPU Cooler') !== false) ? 'checked' : ''; ?>>
+                <label for="cooler">CPU Cooler</label><br>
+                <input type="checkbox" id="motherboard" name="category[]" value="Motherboard" <?php echo ($edit_mode && strpos($edit_product['category'], 'Motherboard') !== false) ? 'checked' : ''; ?>>
+                <label for="motherboard">Motherboard</label><br>
+                <input type="checkbox" id="memory" name="category[]" value="Memory" <?php echo ($edit_mode && strpos($edit_product['category'], 'Memory') !== false) ? 'checked' : ''; ?>>
+                <label for="memory">Memory</label><br>
+                <input type="checkbox" id="storage" name="category[]" value="Storage" <?php echo ($edit_mode && strpos($edit_product['category'], 'Storage') !== false) ? 'checked' : ''; ?>>
+                <label for="storage">Storage</label><br>
+                <input type="checkbox" id="video_card" name="category[]" value="Video Card" <?php echo ($edit_mode && strpos($edit_product['category'], 'Video Card') !== false) ? 'checked' : ''; ?>>
+                <label for="video_card">Video Card</label><br>
+                <input type="checkbox" id="case" name="category[]" value="Case" <?php echo ($edit_mode && strpos($edit_product['category'], 'Case') !== false) ? 'checked' : ''; ?>>
+                <label for="case">Case</label><br>
+                <input type="checkbox" id="power_supply" name="category[]" value="Power Supply" <?php echo ($edit_mode && strpos($edit_product['category'], 'Power Supply') !== false) ? 'checked' : ''; ?>>
+                <label for="power_supply">Power Supply</label><br>
+                <input type="checkbox" id="operating_system" name="category[]" value="Operating System" <?php echo ($edit_mode && strpos($edit_product['category'], 'Operating System') !== false) ? 'checked' : ''; ?>>
+                <label for="operating_system">Operating System</label><br>
+                <input type="checkbox" id="monitor" name="category[]" value="Monitor" <?php echo ($edit_mode && strpos($edit_product['category'], 'Monitor') !== false) ? 'checked' : ''; ?>>
+                <label for="monitor">Monitor</label>
+            </div>
+
             <button type="submit" class="btn btn-primary"><?php echo $edit_mode ? "Update Product" : "Add Product"; ?></button>
         </form>
 
@@ -158,31 +191,29 @@ $result = $conn->query($sql);
                     <th>Name</th>
                     <th>Price</th>
                     <th>Image</th>
-                    <th>Action</th>
+                    <th>Category</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['name'] . "</td>";
-                        echo "<td>$" . $row['price'] . "</td>";
-                        echo "<td><img src='images/uploads/" . $row['image'] . "' alt='" . $row['name'] . "' width='100'></td>";
-                        echo "<td>
-                                <a href='add_product.php?edit_id=" . $row['id'] . "&password=movementplayer' class='btn btn-primary'>Edit</a>
-                                <a href='add_product.php?delete_id=" . $row['id'] . "&password=movementplayer' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this product?\");'>Delete</a>
-                              </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>No products found.</td></tr>";
-                }
-                ?>
+                <?php while ($product = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo $product['id']; ?></td>
+                        <td><?php echo $product['name']; ?></td>
+                        <td><?php echo $product['price']; ?></td>
+                        <td><img src="images/uploads/<?php echo $product['image']; ?>" alt="Product Image" width="100"></td>
+                        <td><?php echo $product['category']; ?></td>
+                        <td>
+                            <a href="add_product.php?edit_id=<?php echo $product['id']; ?>&password=<?php echo $admin_password; ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="add_product.php?delete_id=<?php echo $product['id']; ?>&password=<?php echo $admin_password; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
