@@ -105,7 +105,7 @@
 </nav>
 
 <div class="container text-center">
-    <h1>Welcome to Sigmas PC</h1>
+    <h1>Welcome to Sigmas</h1>
     <h2>Find the best components based on your budget.</h2>
     <a href="search.php" class="btn btn-primary">Search for Components</a>
 </div>
