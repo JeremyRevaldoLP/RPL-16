@@ -33,7 +33,7 @@
         /* Animated gradient text for the heading */
         h1 {
             font-size: 3rem; /* Adjust size as needed */
-            background: linear-gradient(90deg, #00ff8f, #00cfff, #00cfff, #00ff8f); /* Multiple gradient colors */
+            background: linear-gradient(90deg, #C08B5C, #795458, #C08B5C, #795458); /* Multiple gradient colors */
             background-size: 300%; /* Makes the gradient larger for the animation */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; /* Makes the text fill transparent to show the gradient */
@@ -42,7 +42,7 @@
 
         h2 {
             font-size: 1,5rem; /* Adjust size as needed */
-            background: linear-gradient(90deg, #0cf11a, #0cf11a, #0cf11a, #0cf11a); /* Multiple gradient colors */
+            background: linear-gradient(90deg, #C08B5C, #C08B5C, #C08B5C, #C08B5C); /* Multiple gradient colors */
             background-size: 300%; /* Makes the gradient larger for the animation */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; /* Makes the text fill transparent to show the gradient */
@@ -70,7 +70,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            color: #007bff; /* Change color on hover */
+            color: #C08B5C; /* Change color on hover */
         }
 
         /* Center the search button */
@@ -105,7 +105,7 @@
 </nav>
 
 <div class="container text-center">
-    <h1>Welcome to Sigmas</h1>
+    <h1>Welcome to Sigmas PC</h1>
     <h2>Find the best components based on your budget.</h2>
     <a href="search.php" class="btn btn-primary">Search for Components</a>
 </div>
