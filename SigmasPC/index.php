@@ -67,12 +67,12 @@
          padding: 5px 10px;
          margin-right: 10px;
          border-radius: 5px;  /* Optional: Keep some border radius */
-}
+    }
 
         .navbar-nav .nav-link:hover {
           background-color: #C08B5C;  /* Background color when hovered */
          color: #795458;  /* Change text color on hover for better visibility */
-}
+    }
 
         .btn-primary {
         background-color: #C08B5C; /* Custom background color for the button */
