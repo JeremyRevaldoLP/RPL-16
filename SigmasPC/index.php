@@ -64,14 +64,20 @@
 
         /* Navbar Link Hover Animation */
         .navbar-nav .nav-link {
-            font-family: 'Verdana', sans-serif; /* Font for navbar links */
-            color: #000000; /* Default navbar link color */
-            transition: color 0.3s ease;
-        }
+         padding: 5px 10px;
+         margin-right: 10px;
+         border-radius: 5px;  /* Optional: Keep some border radius */
+}
 
         .navbar-nav .nav-link:hover {
-            color: #C08B5C; /* Change color on hover */
-        }
+          background-color: #C08B5C;  /* Background color when hovered */
+         color: #795458;  /* Change text color on hover for better visibility */
+}
+
+        .btn-primary {
+        background-color: #C08B5C; /* Custom background color for the button */
+        border-color: #C08B5C;     /* Custom border color */
+    }
 
         /* Center the search button */
         .container {
