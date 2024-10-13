@@ -32,7 +32,7 @@
     </div>
 
     <footer class="text-center mt-5">
-        <p>&copy; 2024 Sigmas PC Inc. All rights reserved.</p>
+        <p>&copy; 2025 Sigmas PC Inc. All rights reserved.</p>
     </footer>
 </body>
 </html>
