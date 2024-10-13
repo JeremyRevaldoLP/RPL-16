@@ -41,7 +41,7 @@
         }
 
         h2 {
-            font-size: 1,5rem; /* Adjust size as needed */
+            font-size: 1rem; /* Adjust size as needed */
             background: linear-gradient(90deg, #795458, #795458, #795458, #795458); /* Multiple gradient colors */
             background-size: 300%; /* Makes the gradient larger for the animation */
             -webkit-background-clip: text;
@@ -72,11 +72,12 @@
         .navbar-nav .nav-link:hover {
           background-color: #C08B5C;  /* Background color when hovered */
          color: #795458;  /* Change text color on hover for better visibility */
-    }
+         border-color: #C08B5C;     /* Custom border color */
+    }    
 
         .btn-primary {
         background-color: #C08B5C; /* Custom background color for the button */
-        border-color: #C08B5C;     /* Custom border color */
+        border-color: #795458;     /* Custom border color */
     }
 
         /* Center the search button */
@@ -95,7 +96,7 @@
 
 <!-- Video Background -->
 <video id="video-background" autoplay loop muted>
-    <source src="images/web/nekobackground.mp4" type="video/mp4"> <!-- Replace with your video path -->
+    <source src="images/web/backgroundpc.mp4" type="video/mp4"> <!-- Replace with your video path -->
     Your browser does not support HTML5 video.
 </video>
 
