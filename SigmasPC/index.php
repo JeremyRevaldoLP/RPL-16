@@ -89,13 +89,13 @@
 
 <!-- Video Background -->
 <video id="video-background" autoplay loop muted>
-    <source src="img/nekobackground.mp4" type="video/mp4"> <!-- Replace with your video path -->
+    <source src="images/web/nekobackground.mp4" type="video/mp4"> <!-- Replace with your video path -->
     Your browser does not support HTML5 video.
 </video>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">
-        <img src="img/logo.jpg" alt="Logo" height="40"> <!-- Replace with your logo path -->
+        <img src="images/web/logo.jpg" alt="Logo" height="40"> <!-- Replace with your logo path -->
     </a>
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
