@@ -42,7 +42,7 @@
 
         h2 {
             font-size: 1rem; /* Adjust size as needed */
-            background: linear-gradient(90deg, #795458, #795458, #795458, #795458); /* Multiple gradient colors */
+            background: linear-gradient(90deg, #f0f4f9, #f0f725, #f0f4f9, #f0f725); /* Multiple gradient colors */
             background-size: 300%; /* Makes the gradient larger for the animation */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; /* Makes the text fill transparent to show the gradient */
@@ -71,13 +71,13 @@
 
         .navbar-nav .nav-link:hover {
           background-color: #C08B5C;  /* Background color when hovered */
-         color: #795458;  /* Change text color on hover for better visibility */
+         color: #1f3e5f;  /* Change text color on hover for better visibility */
          border-color: #C08B5C;     /* Custom border color */
     }    
 
         .btn-primary {
-        background-color: #C08B5C; /* Custom background color for the button */
-        border-color: #795458;     /* Custom border color */
+        background-color: #1f3e5f; /* Custom background color for the button */
+        border-color: #C08B5C;     /* Custom border color */
     }
 
         /* Center the search button */
@@ -88,7 +88,7 @@
             align-items: center;
             height: 70vh; /* Full height for container */
             position: relative; /* Position relative for stacking */
-            z-index: 1; /* Ensure content is above the video */
+            z-index: 2; /* Ensure content is above the video */
         }
     </style>
 </head>
@@ -97,7 +97,6 @@
 <!-- Video Background -->
 <video id="video-background" autoplay loop muted>
     <source src="images/web/backgroundpc.mp4" type="video/mp4"> <!-- Replace with your video path -->
-    Your browser does not support HTML5 video.
 </video>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -113,7 +112,9 @@
 
 <div class="container text-center">
     <h1>Welcome to Sigmas PC</h1>
-    <h2>Find the best components based on your budget.</h2>
+    <h2 style="background-color: rgba(0, 123, 255, 0.1); padding: 15px 20px; border-radius: 8px; border: 2px solid #007bff; display: inline-block; font-size: 1.2rem;">
+        Find the best components based on your budget.
+    </h2>
     <a href="search.php" class="btn btn-primary">Search for Components</a>
 </div>
 
