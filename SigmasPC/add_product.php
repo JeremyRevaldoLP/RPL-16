@@ -21,6 +21,26 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Function to update the SQL file
+function updateSQLFile($conn) {
+    $sql = "SELECT * FROM products";
+    $result = $conn->query($sql);
+    
+    $output = "USE sigmaspc;\n\n"; // Start with the database name
+
+    while ($row = $result->fetch_assoc()) {
+        $output .= "INSERT INTO products (id, name, price, image, category) VALUES (";
+        $output .= $row['id'] . ", ";
+        $output .= "'" . $conn->real_escape_string($row['name']) . "', ";
+        $output .= $row['price'] . ", ";
+        $output .= "'" . $conn->real_escape_string($row['image']) . "', ";
+        $output .= "'" . $conn->real_escape_string($row['category']) . "');\n";
+    }
+
+    // Write to the SQL file
+    file_put_contents('db/sigmaspc.sql', $output);
+}
+
 // Handle product deletion
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
@@ -46,6 +66,7 @@ if (isset($_GET['delete_id'])) {
 
     if ($stmt->execute()) {
         echo "Product deleted successfully.";
+        updateSQLFile($conn); // Update the SQL file after deletion
     } else {
         echo "Error deleting product: " . $conn->error;
     }
@@ -109,6 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("ssss", $name, $price, $image, $categories);
             if ($stmt->execute()) {
                 echo "New product added successfully";
+                updateSQLFile($conn); // Update the SQL file after adding a new product
+                header("location: export.php");
             } else {
                 echo "Error: " . $conn->error;
             }
@@ -187,6 +210,10 @@ $result = $conn->query($sql);
             </div>
 
             <button type="submit" class="btn btn-primary"><?php echo $edit_mode ? "Update Product" : "Add Product"; ?></button>
+        </form>
+
+        <form action="import.php?password=movementplayer" method="post">
+                <button type="submit" class="btn btn-success">Import Data</button>
         </form>
 
         <h2 class="mt-5">Existing Products</h2>
