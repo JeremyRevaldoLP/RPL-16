@@ -131,6 +131,12 @@ $result = $conn->query($sql);
     <title>Add Product | PC Component Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        // After the page loads, remove password in the url
+        window.onload = function() {
+            history.replaceState(null, null, window.location.pathname);
+        };
+    </script>    
 </head>
 <body>
     <div class="admin-container mt-5">
