@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 
 // Initialize an array to hold selected product IDs
 $selectedProducts = $_POST['selected_products'] ?? [];
+$budget = $_POST['budget'] ?? 0; // Get budget from POST
 
 // Check if selected products are set and process them
 if (isset($_POST['selected_products'])) {
@@ -94,6 +95,10 @@ if (!empty($selectedProducts)) {
             <?php endforeach; ?>
         </ul>
         <h4 class="mt-4">Total Price: $<?php echo number_format($totalPrice, 2); ?></h4>
+
+        <?php if ($totalPrice > $budget): ?>
+            <div class="alert alert-danger" role="alert">You are over your budget by $<?php echo number_format($totalPrice - $budget, 2); ?>!</div>
+        <?php endif; ?>
     <?php else: ?>
         <p>No products selected.</p>
     <?php endif; ?>

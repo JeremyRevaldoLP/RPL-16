@@ -148,6 +148,7 @@ if (!empty($budget) || !empty($search_query) || !empty($categories)) {
     <!-- Form for Checkout -->
     <form action="checkout.php" method="post">
         <input type="hidden" id="selected-products" name="selected_products" value=""> <!-- Hidden input to store selected product IDs -->
+        <input type="hidden" name="budget" value="<?php echo htmlspecialchars($budget); ?>"> <!-- Hidden input for budget -->
         <button type="submit" class="btn btn-success checkout-button">Checkout</button>
     </form>
 
