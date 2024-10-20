@@ -35,6 +35,7 @@ function updateSQLFile($conn) {
         $output .= $row['price'] . ", ";
         $output .= "'" . $conn->real_escape_string($row['image']) . "', ";
         $output .= "'" . $conn->real_escape_string($row['category']) . "');\n";
+        $output .= "'" . $conn->real_escape_string($row['link']) . "');\n";
     }
 
     // Write to the SQL file
@@ -93,6 +94,7 @@ if (isset($_GET['edit_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $price = $_POST['price'];
+    $link = $_POST['link']; // Get the link input
     $image = $_FILES['image']['name'];
     $target_dir = "images/uploads/";
     $target_file = $target_dir . basename($image);
@@ -104,14 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($edit_mode && $edit_id) {
         if (!empty($image)) {
             move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-            $sql = "UPDATE products SET name = ?, price = ?, image = ?, category = ? WHERE id = ?";
+            $sql = "UPDATE products SET name = ?, price = ?, image = ?, category = ?, link = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssi", $name, $price, $image, $categories, $edit_id);
+            $stmt->bind_param("sssssi", $name, $price, $image, $categories, $link, $edit_id);
         } else {
             // Update without changing the image
-            $sql = "UPDATE products SET name = ?, price = ?, category = ? WHERE id = ?";
+            $sql = "UPDATE products SET name = ?, price = ?, category = ?, link = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssi", $name, $price, $categories, $edit_id);
+            $stmt->bind_param("ssssi", $name, $price, $categories, $link, $edit_id);
         }
 
         if ($stmt->execute()) {
@@ -125,9 +127,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // If adding a new product
     else {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-            $sql = "INSERT INTO products (name, price, image, category) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO products (name, price, image, category, link) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssss", $name, $price, $image, $categories);
+            $stmt->bind_param("sssss", $name, $price, $image, $categories, $link);
             if ($stmt->execute()) {
                 echo "New product added successfully";
                 updateSQLFile($conn); // Update the SQL file after adding a new product
@@ -181,6 +183,10 @@ $result = $conn->query($sql);
                     <img src="images/uploads/<?php echo $edit_product['image']; ?>" alt="Current Image" width="100">
                 <?php endif; ?>
             </div>
+            <div class="mb-3">
+                <label for="link" class="form-label">Product Link</label>
+                <input type="url" class="form-control" id="link" name="link" value="<?php echo $edit_mode ? $edit_product['link'] : ''; ?>" required>
+            </div>
 
             <!-- Add this section for product categories -->
             <div class="mb-3">
@@ -225,6 +231,7 @@ $result = $conn->query($sql);
                     <th>Price</th>
                     <th>Image</th>
                     <th>Category</th>
+                    <th>Link</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -236,6 +243,7 @@ $result = $conn->query($sql);
                         <td><?php echo $product['price']; ?></td>
                         <td><img src="images/uploads/<?php echo $product['image']; ?>" alt="Product Image" width="100"></td>
                         <td><?php echo $product['category']; ?></td>
+                        <td class="link-column"><a href="<?php echo $product['link']; ?>" target="_blank"><?php echo $product['link']; ?></a></td>
                         <td>
                             <a href="add_product.php?edit_id=<?php echo $product['id']; ?>&password=<?php echo $admin_password; ?>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="add_product.php?delete_id=<?php echo $product['id']; ?>&password=<?php echo $admin_password; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>

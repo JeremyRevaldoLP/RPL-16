@@ -108,6 +108,20 @@ p {
     background-color: #795458;
 }
 
+.checkout-button {
+    background-color: #28a745; /* Change to a brighter color */
+    color: #ffffff; /* White text for contrast */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding for better size */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor changes to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.checkout-button:hover {
+    background-color: #218838; /* Darker shade on hover */
+}
+
 /* Text alignment */
 .text-center {
     text-align: center;
@@ -138,4 +152,17 @@ p {
 
 .admin-container h1 {
     text-align: center;
+}
+
+.link-column {
+    max-width: 150px; /* Adjust as necessary */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if the text is too long */
+    white-space: nowrap; /* Prevents the text from wrapping to the next line */
+}
+
+/* Checkout.php Styles */
+.product-image {
+    max-width: 1500px; /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
 }

@@ -101,7 +101,7 @@ if (!empty($budget) || !empty($search_query) || !empty($categories)) {
     <h2 class="my-4">Search Products by Budget/Product name</h2>
     <form action="search.php" method="get">
         <label for="budget">Enter your budget ($):</label>
-        <input type="number" name="budget" class="form-control" placeholder="Enter your budget" value="<?php echo htmlspecialchars($budget); ?>">
+        <input type="number " name="budget" class="form-control" placeholder="Enter your budget" value="<?php echo htmlspecialchars($budget); ?>">
         <label for="search_query">Search by product name:</label>
         <input type="text" name="search_query" class="form-control" placeholder="Enter product name" value="<?php echo htmlspecialchars($search_query); ?>">
 
@@ -128,7 +128,7 @@ if (!empty($budget) || !empty($search_query) || !empty($categories)) {
                             <h5 class="card-title"><?php echo htmlspecialchars($row['name']); ?></h5>
                             <p class="card-text">$<?php echo htmlspecialchars($row['price']); ?></p>
                             <!-- Checkbox to select product -->
-                            <input type="checkbox" class="product-checkbox" data-price="<?php echo htmlspecialchars($row['price']); ?>"> Select
+                            <input type="checkbox" class="product-checkbox" data-id="<?php echo htmlspecialchars($row['id']); ?>" data-price="<?php echo htmlspecialchars($row['price']); ?>"> Select
                         </div>
                     </div>
                 </div>
@@ -144,33 +144,53 @@ if (!empty($budget) || !empty($search_query) || !empty($categories)) {
     <div class="total-container">
         <p class="total-price">Total: $0</p>
     </div>
-</div>
 
-<script>
-    // Select all checkboxes and the total display element
-    const checkboxes = document.querySelectorAll('.product-checkbox');
-    const totalDisplay = document.querySelector('.total-price');
+    <!-- Form for Checkout -->
+    <form action="checkout.php" method="post">
+        <input type="hidden" id="selected-products" name="selected_products" value=""> <!-- Hidden input to store selected product IDs -->
+        <button type="submit" class="btn btn-success checkout-button">Checkout</button>
+    </form>
 
-    // Function to update the total price
-    function updateTotal() {
-        let total = 0;
+    <script>
+        // Select all checkboxes, the total display element, and the hidden input
+        const checkboxes = document.querySelectorAll('.product-checkbox');
+        const totalDisplay = document.querySelector('.total-price');
+        const selectedProductsInput = document.getElementById('selected-products');
 
-        // Loop through all checkboxes and add the price of checked items
+        // Function to update the total price
+        function updateTotal() {
+            let total = 0;
+
+            // Loop through all checkboxes and add the price of checked items
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    total += parseFloat(checkbox.getAttribute('data-price'));
+                }
+            });
+
+            // Update the total display
+            totalDisplay.innerText = 'Total: $' + total.toFixed(2);
+        }
+
+        // Function to update the hidden input with selected product IDs
+        function updateSelectedProducts() {
+            const selectedIds = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedIds.push(checkbox.getAttribute('data-id'));
+                }
+            });
+            selectedProductsInput.value = selectedIds.join(','); // Join selected IDs with commas
+        }
+
+        // Add an event listener to each checkbox to recalculate the total and update the hidden input when changed
         checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                total += parseFloat(checkbox.getAttribute('data-price'));
-            }
+            checkbox.addEventListener('change', () => {
+                updateTotal();
+                updateSelectedProducts();
+            });
         });
-
-        // Update the total display
-        totalDisplay.innerText = 'Total: $' + total.toFixed(2);
-    }
-
-    // Add an event listener to each checkbox to recalculate the total when changed
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateTotal);
-    });
-</script>
+    </script>
 
 </body>
 </html>
