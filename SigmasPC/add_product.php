@@ -193,8 +193,6 @@ $result = $conn->query($sql);
                 <label for="category" class="form-label">Product Category</label><br>
                 <input type="checkbox" id="cpu" name="category[]" value="CPU" <?php echo ($edit_mode && strpos($edit_product['category'], 'CPU') !== false) ? 'checked' : ''; ?>>
                 <label for="cpu">CPU</label><br>
-                <input type="checkbox" id="gpu" name="category[]" value="GPU" <?php echo ($edit_mode && strpos($edit_product['category'], 'GPU') !== false) ? 'checked' : ''; ?>>
-                <label for="gpu">GPU</label><br>
                 <input type="checkbox" id="cooler" name="category[]" value="CPU Cooler" <?php echo ($edit_mode && strpos($edit_product['category'], 'CPU Cooler') !== false) ? 'checked' : ''; ?>>
                 <label for="cooler">CPU Cooler</label><br>
                 <input type="checkbox" id="motherboard" name="category[]" value="Motherboard" <?php echo ($edit_mode && strpos($edit_product['category'], 'Motherboard') !== false) ? 'checked' : ''; ?>>
