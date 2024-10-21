@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 // Initialize an array to hold selected product IDs
 $selectedProducts = $_POST['selected_products'] ?? [];
-$budget = $_POST['budget'] ?? 0; // Get budget from POST
+$budget = $_POST['budget'] ?? ''; // Get budget from POST
 
 // Check if selected products are set and process them
 if (isset($_POST['selected_products'])) {
@@ -83,7 +83,7 @@ if (!empty($selectedProducts)) {
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-4">
-                            <img src="images/uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-fluid product-image">
+                            <img src="images/uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="width: 100px; height: auto;">
                         </div>
                         <div class="col-8">
                             <strong><?php echo htmlspecialchars($product['name']); ?></strong> - $<?php echo htmlspecialchars($product['price']); ?>
@@ -96,8 +96,12 @@ if (!empty($selectedProducts)) {
         </ul>
         <h4 class="mt-4">Total Price: $<?php echo number_format($totalPrice, 2); ?></h4>
 
-        <?php if ($totalPrice > $budget): ?>
+        <?php if ($budget === '' || !is_numeric($budget)): ?>
+            <div class="alert alert-warning" role="alert">Please enter a valid budget!</div>
+        <?php elseif ($totalPrice > $budget): ?>
             <div class="alert alert-danger" role="alert">You are over your budget by $<?php echo number_format($totalPrice - $budget, 2); ?>!</div>
+        <?php elseif ($totalPrice < $budget): ?>
+            <div class="alert alert-success" role="alert">You are under your budget by $<?php echo number_format($budget - $totalPrice, 2); ?>!</div>
         <?php endif; ?>
     <?php else: ?>
         <p>No products selected.</p>

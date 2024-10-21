@@ -161,8 +161,4 @@ p {
     white-space: nowrap; /* Prevents the text from wrapping to the next line */
 }
 
-/* Checkout.php Styles */
-.product-image {
-    max-width: 1500px; /* Adjust this value as needed */
-    height: auto; /* Maintain aspect ratio */
-}
+/* Checkout.php CSS section */
