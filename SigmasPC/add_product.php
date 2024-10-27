@@ -155,6 +155,7 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product(ADMIN) | Sigmas PC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script>
         // After the page loads, remove password in the url
@@ -221,7 +222,7 @@ $result = $conn->query($sql);
         </form>
 
         <h2 class="mt-5">Existing Products</h2>
-        <table class="table">
+        <table class="table" id="productTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -253,6 +254,20 @@ $result = $conn->query($sql);
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.table').DataTable({
+            paging: true,  // Enables pagination
+            searching: true,  // Enables search functionality
+            order: [[0, 'asc']],  // Sorts by the first column by default
+            columnDefs: [
+                { orderable: false, targets: [3, 4, 6] }  // Disable sorting for image and action columns
+            ]
+        });
+    });
+    </script>
 </body>
 </html>
 
