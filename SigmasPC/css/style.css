@@ -99,13 +99,71 @@ p {
 }
 
 .btn-primary {
-    background-color: #C08B5C;
+    background-color: #007bff;
     color: white;
     border: none;
 }
 
 .btn-primary:hover {
-    background-color: #795458;
+    background-color: #0056b3;
+}
+
+.btn.btn-success {
+    background-color: #28a745; /* Success button color */
+    border: none; /* Remove default border */
+}
+
+.btn.btn-success:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.btn.btn-warning.btn-sm {
+    background-color: #ffc107; /* Warning button color */
+    border: none; /* Remove default border */
+}
+
+.btn.btn-warning.btn-sm:hover {
+    background-color: #e0a800; /* Darker yellow on hover */
+}
+
+.btn.btn-danger.btn-sm {
+    background-color: #dc3545; /* Danger button color */
+    border: none; /* Remove default border */
+}
+
+.btn.btn-danger.btn-sm:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Table styles */
+.table {
+    width: 100%; /* Full width table */
+    margin-bottom: 1rem; /* Space below table */
+}
+
+.table th {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
+}
+
+.table td {
+    vertical-align: middle; /* Align table cells vertically */
+}
+
+/* Checkbox styles */
+.mb-3 input[type="checkbox"] {
+    margin-right: 5px; /* Space between checkbox and label */
+}
+
+/* Image styles */
+img {
+    max-width: 100%; /* Responsive images */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Additional spacing */
+.mt-5 {
+    margin-top: 3rem; /* Adjust margin for spacing */
 }
 
 .checkout-button {
@@ -154,6 +212,19 @@ p {
     text-align: center;
 }
 
+.admin-container h2 {
+    text-align: center;
+}
+
+/* Form styles */
+.form-label {
+    font-weight: bold; /* Make label text bold */
+}
+
+.form-control {
+    border: 1px solid #C08B5C; /* Change border color */
+}
+
 .link-column {
     max-width: 150px; /* Adjust as necessary */
     overflow: hidden;
@@ -161,4 +232,4 @@ p {
     white-space: nowrap; /* Prevents the text from wrapping to the next line */
 }
 
-/* Checkout.php CSS section */
+
