@@ -86,6 +86,7 @@
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="search.php">Search</a></li>
         <li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.php">Prasstyo Adhi</a></li>
     </ul>
 </nav>
 
