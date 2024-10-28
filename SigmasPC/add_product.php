@@ -211,7 +211,9 @@ $result = $conn->query($sql);
                 <input type="checkbox" id="operating_system" name="category[]" value="Operating System" <?php echo ($edit_mode && strpos($edit_product['category'], 'Operating System') !== false) ? 'checked' : ''; ?>>
                 <label for="operating_system">Operating System</label><br>
                 <input type="checkbox" id="monitor" name="category[]" value="Monitor" <?php echo ($edit_mode && strpos($edit_product['category'], 'Monitor') !== false) ? 'checked' : ''; ?>>
-                <label for="monitor">Monitor</label>
+                <label for="monitor">Monitor</label><br>
+                <input type="checkbox" id="mukaku" name="category[]" value="Mukaku" <?php echo ($edit_mode && strpos($edit_product['category'], 'Mukaku') !== false) ? 'checked' : ''; ?>>
+                <label for="mukaku">Mukaku</label>
             </div>
 
             <button type="submit" class="btn btn-primary"><?php echo $edit_mode ? "Update Product" : "Add Product"; ?></button>
