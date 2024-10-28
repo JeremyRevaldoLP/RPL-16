@@ -9,99 +9,76 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&family=Lilita+One&family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap" rel="stylesheet">
     
-    <!-- Inline CSS for Background Video and Animated Gradient Text -->
+    <!-- Inline CSS for Background Image and Animated Gradient Text -->
     <style>
         body {
             margin: 0;
-            font-family: 'MuseoModerno', 'Lilita-One'; /* Default font for the whole page */
-            color: #333333; /* Default text color */
-            overflow: hidden; /* Prevent scrolling */
+            font-family: 'MuseoModerno', 'Lilita-One';
+            color: #333333;
+            overflow: hidden;
+            background-image: url('images/backgrounds/doll-background.jpg'); /* Replace with the path to your doll image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps background fixed on scroll */
         }
 
-        /* Video Background */
-        #video-background {
-            position: absolute; /* Changed to absolute for better positioning */
-            top: 50%;
-            left: 50%;
-            width: 100%; /* Full width */
-            height: auto; /* Maintain aspect ratio */
-            z-index: -1; /* Ensure video stays behind other content */
-            transform: translate(-50%, -50%); /* Center the video */
-            object-fit: cover; /* Cover the container while maintaining aspect ratio */
-        }
-
-        /* Animated gradient text for the heading */
         h1 {
-            font-size: 3rem; /* Adjust size as needed */
-            background: linear-gradient(90deg, #C08B5C, #795458, #C08B5C, #795458); /* Multiple gradient colors */
-            background-size: 300%; /* Makes the gradient larger for the animation */
+            font-size: 3rem;
+            background: linear-gradient(90deg, #C08B5C, #795458, #C08B5C, #795458);
+            background-size: 300%;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; /* Makes the text fill transparent to show the gradient */
-            animation: gradientAnimation 5s ease infinite; /* Apply animation */
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnimation 5s ease infinite;
         }
 
         h2 {
-            font-size: 1rem; /* Adjust size as needed */
-            background: linear-gradient(90deg, #f0f4f9, #f0f725, #f0f4f9, #f0f725); /* Multiple gradient colors */
-            background-size: 300%; /* Makes the gradient larger for the animation */
+            font-size: 1rem;
+            background: linear-gradient(90deg, #f0f4f9, #f0f725, #f0f4f9, #f0f725);
+            background-size: 300%;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; /* Makes the text fill transparent to show the gradient */
-            animation: gradientAnimation 7s ease infinite; /* Apply animation */
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnimation 7s ease infinite;
         }
 
-        /* Keyframes for gradient animation */
         @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%; /* Start position */
-            }
-            50% {
-                background-position: 100% 50%; /* Midpoint position */
-            }
-            100% {
-                background-position: 0% 50%; /* Return to start */
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Navbar Link Hover Animation */
         .navbar-nav .nav-link {
-         padding: 5px 10px;
-         margin-right: 10px;
-         border-radius: 5px;  /* Optional: Keep some border radius */
-    }
+            padding: 5px 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
 
         .navbar-nav .nav-link:hover {
-          background-color: #C08B5C;  /* Background color when hovered */
-         color: #1f3e5f;  /* Change text color on hover for better visibility */
-         border-color: #C08B5C;     /* Custom border color */
-    }    
+            background-color: #C08B5C;
+            color: #1f3e5f;
+            border-color: #C08B5C;
+        }
 
         .btn-primary {
-        background-color: #1f3e5f; /* Custom background color for the button */
-        border-color: #C08B5C;     /* Custom border color */
-    }
+            background-color: #1f3e5f;
+            border-color: #e73813;
+        }
 
-        /* Center the search button */
         .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 70vh; /* Full height for container */
-            position: relative; /* Position relative for stacking */
-            z-index: 2; /* Ensure content is above the video */
+            height: 70vh;
+            position: relative;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
 
-<!-- Video Background -->
-<video id="video-background" autoplay loop muted>
-    <source src="images/web/backgroundpc.mp4" type="video/mp4"> <!-- Replace with your video path -->
-</video>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">
-        <img src="images/web/sigmaL.png" alt="Logo" height="40"> <!-- Replace with your logo path -->
+        <img src="C:\Users\lenovo\Pictures\Saved Pictures\foto.png" alt="Logo" height="40">
     </a>
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
