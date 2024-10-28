@@ -27,8 +27,7 @@ $all_categories = [
     'Case', 
     'Power Supply', 
     'Operating System', 
-    'Monitor',
-    'Mukaku'
+    'Monitor'
 ];
 
 $params = []; // Initialize an array to hold parameters for bind_param
