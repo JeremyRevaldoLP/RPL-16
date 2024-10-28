@@ -78,7 +78,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">
-        <img src="C:\Users\lenovo\Pictures\Saved Pictures\foto.png" alt="Logo" height="40">
+        <img src="https://images.appl.goo.gl/RQUwU1tVkSAEUdUw9.png" alt="Logo" height="40">
     </a>
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
