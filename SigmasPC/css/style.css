@@ -99,7 +99,7 @@ p {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #0056b3;
     color: white;
     border: none;
 }
@@ -187,7 +187,7 @@ img {
 
 .row .card-body h5 {
     /* custom styles for h5 within .row (on search.php)*/
-    color: #000000;
+    color: #c41f1f;
     font-size: 18px;
 }
 
